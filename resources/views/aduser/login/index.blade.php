@@ -6,12 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="POST"style="text-align: center; padding-top: 150px;">
+    <form action="{{route('adlog')}}" method="POST"style="text-align: center; padding-top: 150px;">
+        @csrf
         <h3>Administrative User</h3>
-         Email<br>
-        <input type="email" name="auemail"><br>
+        Administrative Username<br>
+        <input type="text" name="adname"><br>
          Password<br>
-        <input type="password" name="aupassword"><br><br>
+        <input type="password" name="adpass"><br><br>
         
 
 

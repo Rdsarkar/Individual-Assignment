@@ -9,7 +9,7 @@
     <form action="{{route('alog')}}" method="POST"style="text-align: center; padding-top: 150px;">
         @csrf
         <h3>Admin Login</h3>
-         Email<br>
+         Admin Name<br>
         <input type="text" name="aname"><br>
          Password<br>
         <input type="password" name="apass"><br><br>

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Aduser;
+
 use Illuminate\Http\Request;
 
-
-class AdloginController extends Controller
+class AdhomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class AdloginController extends Controller
     public function index()
     {
         //
-        return view('aduser.login.index');
+        return view('adhome.index');
     }
 
     /**
@@ -37,7 +36,6 @@ class AdloginController extends Controller
     public function store(Request $request)
     {
         //
-      
     }
 
     /**

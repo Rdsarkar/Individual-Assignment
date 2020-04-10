@@ -4,18 +4,31 @@ namespace App\Http\Controllers;
 use App\Aduser;
 use Illuminate\Http\Request;
 
-
-class AdloginController extends Controller
+class AdController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('aduser.login.index');
+        $findad = Aduser::where('adname', $request->adname)
+                ->where('adpass', $request->adpass)
+                ->first();
+
+
+                if($findad != null){
+                    $request->session()->put('adname', $findad->adname);
+                    $request->session()->put('id', $findad->id);
+                    return redirect()->route('adhome');
+        
+                }else{
+                    $request->session()->flash('msg', 'invalid username/password');
+                    //return view('login.index');
+                    return redirect()->route('adlogin');
+                }
     }
 
     /**
@@ -37,7 +50,6 @@ class AdloginController extends Controller
     public function store(Request $request)
     {
         //
-      
     }
 
     /**

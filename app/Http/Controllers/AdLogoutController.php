@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Aduser;
+
 use Illuminate\Http\Request;
 
-
-class AdloginController extends Controller
+class AdLogoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
         //
-        return view('aduser.login.index');
+        $req->session()->flush();
+        return redirect()->route('adlogin');
     }
 
     /**
@@ -37,7 +37,6 @@ class AdloginController extends Controller
     public function store(Request $request)
     {
         //
-      
     }
 
     /**

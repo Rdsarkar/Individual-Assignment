@@ -15,12 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Admin
+Route::get('/Adminlogin','LoginController@index')->name('alogin');          //Login Page Showing
+Route::post('/Admin','AdminController@index')->name('alog');                //Login Page Requested for the AdminHome Get
+Route::get('/alogout','AdminLogoutController@index')->name('alogout');      //Logout 
 
-Route::get('/Adminlogin','LoginController@index')->name('alogin');
-Route::post('/Admin','AdminController@index')->name('alog');
+//AdminHome Get
+Route::get('/adminhome', 'AhomeController@index')->name('ahome');           //Showing AdminHome 
 
-Route::get('/adminhome', 'AhomeController@index')->name('ahome');
-Route::get('/alogout','AdminLogoutController@index')->name('alogout');
 
-Route::get('/Administrative_User','AdloginController@index')->name('adlogin');
 
+//Administrative_User
+
+Route::get('/Administrative_User_login','AdloginController@index')->name('adlogin'); //Login Page Showing 
+Route::post('/Administrative_User','AdController@index')->name('adlog');//Login Page Requested for the Administration Home Get
+Route::get('/adlogout','AdLogoutController@index')->name('adlogout');//Logout 
+
+//AdministrationUserHome Get
+Route::get('/adhome', 'AdhomeController@index')->name('adhome');  //Showing Administration Home
