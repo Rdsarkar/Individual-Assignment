@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Role;
+use Validator;
 
-class AdhomeController extends Controller
+
+class RegController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class AdhomeController extends Controller
     public function index()
     {
         //
-        return view('adhome.index');
+        return view('reg.index');
     }
 
     /**
@@ -36,6 +38,30 @@ class AdhomeController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validation = Validator::make($request->all(),[
+            'bemail'=>'required',
+            'bname'=>'required',
+            'bpass'=>'required'
+        ]);
+
+            if($validation->fails()){
+                return back()
+                        ->with('erroes', $validation->errors())
+                        ->withInput();
+            }
+
+
+        $role = new Role();
+
+        $role->bemail=$request->bemail;
+        $role->bname=$request->bname;
+        $role->bpass=$request->bpass;
+        $role->type="Administrative User";
+     
+        $role->save();
+
+        return redirect()->back();
     }
 
     /**

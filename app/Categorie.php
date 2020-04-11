@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Aduser extends Model
+class Categorie extends Model
 {
     //
     protected $fillable = [
-        'adname', 'adpass',
+        'cname',
     ];
-
 }

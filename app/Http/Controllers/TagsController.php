@@ -1,21 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Admin;
 use Illuminate\Http\Request;
+use App\Tag;
+use Validator;
 
-class AdminLogoutController extends Controller
+class TagsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index()
     {
         //
-        $req->session()->flush();
-        return redirect()->route('alogin');
+        $all = Tag::all();  
+
+        return view('tags.index' ,['all'=>$all] );
     }
 
     /**
@@ -26,6 +28,7 @@ class AdminLogoutController extends Controller
     public function create()
     {
         //
+        return view('tags.create');
     }
 
     /**
@@ -37,6 +40,24 @@ class AdminLogoutController extends Controller
     public function store(Request $request)
     {
         //
+        $validation = Validator::make($request->all(),[
+            'tname'=>'required',
+            
+        ]);
+
+            if($validation->fails()){
+                return back()
+                        ->with('erroes', $validation->errors())
+                        ->withInput();
+            }
+
+        $tag = new Tag();
+       
+        $tag->tname=$request->tname;
+        
+        $tag->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -48,6 +69,10 @@ class AdminLogoutController extends Controller
     public function show($id)
     {
         //
+        $updatetag= Tag::where('id', $id)
+                         ->first();
+
+        return view('tags.update', compact('updatetag'));
     }
 
     /**
@@ -71,6 +96,13 @@ class AdminLogoutController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $tag=Tag::find($id);
+      
+        $tag->tname=$request->tname;
+       
+        $tag->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -82,5 +114,7 @@ class AdminLogoutController extends Controller
     public function destroy($id)
     {
         //
+        $categorie=Categorie::destroy($id);
+        return redirect()->back();
     }
 }

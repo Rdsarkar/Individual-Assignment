@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Admin;
 use Illuminate\Http\Request;
+use App\Role;
+use Validator;
+
 
 class LoginController extends Controller
 {
@@ -14,7 +16,7 @@ class LoginController extends Controller
     public function index()
     {
         //
-        return view('admin.login.index');
+        return view('login.index');
     }
 
     /**
@@ -25,6 +27,7 @@ class LoginController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -36,6 +39,47 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         //
+
+        //validation
+        $validation = Validator::make($request->all(),[
+            'bemail'=>'required',
+            'bpass'=>'required'
+        ]);
+
+            if($validation->fails()){
+                return back()
+                        ->with('erroes', $validation->errors())
+                        ->withInput();
+            }
+
+
+        //all
+        $find = Role::where('bemail', $request->bemail)
+                ->where('bpass', $request->bpass)
+                ->first();
+
+
+                if($find != null){
+                
+                    if($find->type == 'admin'){
+                         $request->session()->put('bname', $find->bname);
+                         $request->session()->put('bemail', $find->bemail);
+                         $request->session()->put('id', $find->id);
+
+                         return redirect()->route('adash');
+                    }else{
+                        $request->session()->put('bname', $find->bname);
+                         $request->session()->put('bemail', $find->bemail);
+                         $request->session()->put('id', $find->id);
+
+                         return redirect()->route('userdash');
+                    }
+                    
+        
+                }else{
+                    $request->session()->flash('msg', 'invalid username/password');
+                    return redirect()->route('blogin');
+                }
     }
 
     /**

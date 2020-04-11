@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Aduser;
+
 use Illuminate\Http\Request;
 
-class AdController extends Controller
+class LogoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,21 +14,8 @@ class AdController extends Controller
     public function index(Request $request)
     {
         //
-        $findad = Aduser::where('adname', $request->adname)
-                ->where('adpass', $request->adpass)
-                ->first();
-
-
-                if($findad != null){
-                    $request->session()->put('adname', $findad->adname);
-                    $request->session()->put('id', $findad->id);
-                    return redirect()->route('adhome');
-        
-                }else{
-                    $request->session()->flash('msg', 'invalid username/password');
-                    //return view('login.index');
-                    return redirect()->route('adlogin');
-                }
+        $request->session()->flush();
+        return redirect()->route('blogin');
     }
 
     /**

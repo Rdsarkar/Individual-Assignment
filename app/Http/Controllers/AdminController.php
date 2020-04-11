@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Admin;
 use Illuminate\Http\Request;
+use App\Role;
 
 class AdminController extends Controller
 {
@@ -14,21 +14,7 @@ class AdminController extends Controller
     public function index(Request $request )
     {
         //
-        $find = Admin::where('aname', $request->aname)
-                ->where('apass', $request->apass)
-                ->first();
-
-
-                if($find != null){
-                    $request->session()->put('aname', $find->aname);
-                    $request->session()->put('id', $find->id);
-                    return redirect()->route('ahome');
-        
-                }else{
-                    $request->session()->flash('msg', 'invalid username/password');
-                    //return view('login.index');
-                    return redirect()->route('alogin');
-                }
+        return view('admin.dash.index');
 
         
     }

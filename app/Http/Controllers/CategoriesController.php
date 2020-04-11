@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Aduser;
 use Illuminate\Http\Request;
+use App\Categorie;
+use Validator;
 
 
-class AdloginController extends Controller
+
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,10 @@ class AdloginController extends Controller
     public function index()
     {
         //
-        return view('aduser.login.index');
+
+        $all = Categorie::all();  
+
+        return view('categories.index' ,['all'=>$all] );
     }
 
     /**
@@ -26,6 +31,7 @@ class AdloginController extends Controller
     public function create()
     {
         //
+        return view('categories.create');
     }
 
     /**
@@ -37,7 +43,26 @@ class AdloginController extends Controller
     public function store(Request $request)
     {
         //
-      
+        $validation = Validator::make($request->all(),[
+            'cname'=>'required',
+            
+        ]);
+
+            if($validation->fails()){
+                return back()
+                        ->with('erroes', $validation->errors())
+                        ->withInput();
+            }
+
+        $categorie = new Categorie();
+
+       
+        $categorie->cname=$request->cname;
+        
+        $categorie->save();
+
+        return redirect()->back();
+
     }
 
     /**
@@ -49,6 +74,9 @@ class AdloginController extends Controller
     public function show($id)
     {
         //
+        $updatecat= Categorie::where('id', $id)
+                             ->first();
+        return view('categories.update', compact('updatecat'));
     }
 
     /**
@@ -72,6 +100,15 @@ class AdloginController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $categorie=Categorie::find($id);
+
+      
+        $categorie->cname=$request->cname;
+       
+        $categorie->save();
+
+       return redirect()->back();
     }
 
     /**
@@ -83,5 +120,9 @@ class AdloginController extends Controller
     public function destroy($id)
     {
         //
+        $categorie=Categorie::destroy($id);
+        return redirect()->back();
     }
+
+    
 }

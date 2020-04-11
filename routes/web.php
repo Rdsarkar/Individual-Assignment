@@ -1,35 +1,49 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+//Landing Page
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Admin
-Route::get('/Adminlogin','LoginController@index')->name('alogin');          //Login Page Showing
-Route::post('/Admin','AdminController@index')->name('alog');                //Login Page Requested for the AdminHome Get
-Route::get('/alogout','AdminLogoutController@index')->name('alogout');      //Logout 
-
-//AdminHome Get
-Route::get('/adminhome', 'AhomeController@index')->name('ahome');           //Showing AdminHome 
+//registration
+Route::get('/registration','RegController@index')->name('reg');
+Route::post('/registration','RegController@store')->name('regi');
 
 
+//Login
+Route::get('/login','LoginController@index')->name('blogin');
+Route::post('/login','LoginController@store')->name('blogin');
 
-//Administrative_User
+//Showing Admin Dashboard
+Route::get('/AdminDash','AdminController@index')->name('adash');
 
-Route::get('/Administrative_User_login','AdloginController@index')->name('adlogin'); //Login Page Showing 
-Route::post('/Administrative_User','AdController@index')->name('adlog');//Login Page Requested for the Administration Home Get
-Route::get('/adlogout','AdLogoutController@index')->name('adlogout');//Logout 
+//Showing Administrative User Dashboard
+Route::get('/UserDash','UserController@index')->name('userdash');
 
-//AdministrationUserHome Get
-Route::get('/adhome', 'AdhomeController@index')->name('adhome');  //Showing Administration Home
+
+//Categories
+Route::get('/AllCategories','CategoriesController@index')->name('categories');
+Route::get('/Categories/Create','CategoriesController@create')->name('ccategories');
+Route::post('/CreateCategories','CategoriesController@store')->name('scategories');
+Route::get('/Categories/update/{id}','CategoriesController@show')->name('updateCategories');
+Route::post('/UpdatingCategories/{id}','CategoriesController@update')->name('updating');
+Route::get('/Categories/des/{id}', 'CategoriesController@destroy')->name('des');
+//Tags
+Route::get('/AllTags','TagsController@index')->name('tags');
+Route::get('/Tags/Create','TagsController@create')->name('ctags');
+Route::post('/CreateTags','TagsController@store')->name('stags');
+Route::get('/Tags/update/{id}','TagsController@show')->name('updateTags');
+Route::post('/UpdatingTags/{id}','TagsController@update')->name('updatingtag');
+Route::get('/Tags/des/{id}', 'TagsController@destroy')->name('destroy');
+
+//Logout
+Route::get('/logout','LogoutController@index')->name('blogout');
+
+
+
+
+
+
+
+
+
