@@ -18,7 +18,7 @@
         <tr>
         <td><a href="{{route('categories')}}">All Catagories</a></td>
              <td><a href="{{route('tags')}}">All Tags</a></td>
-            <td><a href="">All Posts</a></td>
+            <td><a href="{{route('posts')}}">All Posts</a></td>
             <td><a href="">All Users</a></td>
         </tr>
 

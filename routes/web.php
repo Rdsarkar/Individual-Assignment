@@ -21,6 +21,14 @@ Route::get('/AdminDash','AdminController@index')->name('adash');
 Route::get('/UserDash','UserController@index')->name('userdash');
 
 
+Route::group(['middleware' => ['locker']], function(){
+//Posts
+Route::get('/AllPosts','PostsController@index')->name('posts');
+Route::get('/Posts/Create','PostsController@create')->name('cposts');
+Route::post('/CreatePosts','PostsController@store')->name('sposts');
+Route::get('/Posts/update/{id}','PostsController@show')->name('updatePosts');
+Route::post('/UpdatingPosts/{id}','PostsController@update')->name('updatingpos');
+
 //Categories
 Route::get('/AllCategories','CategoriesController@index')->name('categories');
 Route::get('/Categories/Create','CategoriesController@create')->name('ccategories');
@@ -35,6 +43,7 @@ Route::post('/CreateTags','TagsController@store')->name('stags');
 Route::get('/Tags/update/{id}','TagsController@show')->name('updateTags');
 Route::post('/UpdatingTags/{id}','TagsController@update')->name('updatingtag');
 Route::get('/Tags/des/{id}', 'TagsController@destroy')->name('destroy');
+});
 
 //Logout
 Route::get('/logout','LogoutController@index')->name('blogout');

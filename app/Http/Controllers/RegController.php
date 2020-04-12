@@ -40,14 +40,14 @@ class RegController extends Controller
         //
 
         $validation = Validator::make($request->all(),[
-            'bemail'=>'required',
+            'bemail'=>'required |  email | unique:roles',
             'bname'=>'required',
             'bpass'=>'required'
         ]);
 
             if($validation->fails()){
                 return back()
-                        ->with('erroes', $validation->errors())
+                        ->with('errors', $validation->errors())
                         ->withInput();
             }
 

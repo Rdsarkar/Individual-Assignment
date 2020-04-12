@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use Validator;
-use App\Tag;
 use Illuminate\Http\Request;
+use App\Categorie;
+use App\Tag;
+use App\Post;
+use Validator;
 
-class TagsController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +17,8 @@ class TagsController extends Controller
     public function index()
     {
         //
-        $all = Tag::all();  
-
-        return view('tags.index' ,['all'=>$all] );
+        $all = Post::all(); 
+        return view('posts.index',['all'=>$all]);
     }
 
     /**
@@ -28,7 +29,10 @@ class TagsController extends Controller
     public function create()
     {
         //
-        return view('tags.create');
+        $all = Categorie::all(); 
+        $allt = Tag::all(); 
+
+        return view('posts.create',compact('all','allt'));
     }
 
     /**
@@ -41,8 +45,9 @@ class TagsController extends Controller
     {
         //
         $validation = Validator::make($request->all(),[
-            'tname'=>'required',
-            
+            'pname'=>'required',
+            'cname'=>'required',
+            'tname'=>'required'
         ]);
 
             if($validation->fails()){
@@ -51,11 +56,15 @@ class TagsController extends Controller
                         ->withInput();
             }
 
-        $tag = new Tag();
-       
-        $tag->tname=$request->tname;
+
+        $post = new Post();
         
-        $tag->save();
+       
+        $post->pname=$request->pname;
+        $post->cname=$request->cname;
+        $post->tname=$request->tname;
+        
+        $post->save();
 
         return redirect()->back();
     }
@@ -69,10 +78,11 @@ class TagsController extends Controller
     public function show($id)
     {
         //
-        $updatetag= Tag::where('id', $id)
-                         ->first();
-
-        return view('tags.update', compact('updatetag'));
+        $all = Categorie::all();
+         $allt = Tag::all(); 
+        $updatepost= Post::where('id', $id)
+                             ->first();
+        return view('posts.update', compact('updatepost','all','allt'));
     }
 
     /**
@@ -96,9 +106,11 @@ class TagsController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $validation = Validator::make($request->all(),[
-            'tname'=>'required',
-            
+            'pname'=>'required',
+            'cname'=>'required',
+            'tname'=>'required'
         ]);
 
             if($validation->fails()){
@@ -108,13 +120,17 @@ class TagsController extends Controller
             }
 
 
-        $tag=Tag::find($id);
-      
-        $tag->tname=$request->tname;
-       
-        $tag->save();
 
-        return redirect()->back();
+        $post=Post::find($id);
+
+      
+        $post->pname=$request->pname;
+        $post->cname=$request->cname;
+        $post->tname=$request->tname;
+        
+        $post->save();
+
+       return redirect()->back();
     }
 
     /**
@@ -126,7 +142,5 @@ class TagsController extends Controller
     public function destroy($id)
     {
         //
-        $categorie=Categorie::destroy($id);
-        return redirect()->back();
     }
 }

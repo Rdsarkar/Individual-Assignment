@@ -11,6 +11,11 @@
 <form action="{{route('updatingtag',['id' => $updatetag->id])}}" method="POST" style="text-align: center; padding-top: 150px;">
         <h3> Create Tags:</h3>
         @csrf
+
+        @foreach($errors->all() as $err)
+		{{$err}} <br>
+        @endforeach 
+        
         <input type="text" name="tname" value="{{$updatetag->tname}}"><br>
         <input type="submit" value="Update">
     </form>

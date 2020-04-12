@@ -10,6 +10,11 @@
 <form action="{{route('scategories')}}" method="POST" style="text-align: center; padding-top: 150px;">
         <h3> Create Categories:</h3>
         @csrf
+
+        @foreach($errors->all() as $err)
+		{{$err}} <br>
+        @endforeach 
+
         <input type="text" name="cname">
         <input type="submit" value="Insert">
     </form>

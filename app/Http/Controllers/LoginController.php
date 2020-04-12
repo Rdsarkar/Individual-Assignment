@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Role;
 use Validator;
-
+use App\Role;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -42,13 +41,13 @@ class LoginController extends Controller
 
         //validation
         $validation = Validator::make($request->all(),[
-            'bemail'=>'required',
+            'bemail'=>'required | email',
             'bpass'=>'required'
         ]);
 
             if($validation->fails()){
                 return back()
-                        ->with('erroes', $validation->errors())
+                        ->with('errors', $validation->errors())
                         ->withInput();
             }
 

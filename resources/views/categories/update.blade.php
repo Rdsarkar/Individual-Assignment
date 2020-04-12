@@ -11,6 +11,11 @@
 <form action="{{route('updating',['id' => $updatecat->id])}}" method="POST" style="text-align: center; padding-top: 150px;">
         <h3> Create Categories:</h3>
         @csrf
+        
+        @foreach($errors->all() as $err)
+		{{$err}} <br>
+        @endforeach
+        
         <input type="text" name="cname" value="{{$updatecat->cname}}"><br>
         <input type="submit" value="Update">
     </form>

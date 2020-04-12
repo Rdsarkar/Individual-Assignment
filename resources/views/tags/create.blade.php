@@ -7,9 +7,15 @@
     <title>AllCategories</title>
 </head>
 <body>
+    <a href="{{route('tags')}}">Back</a>
 <form action="{{route('stags')}}" method="POST" style="text-align: center; padding-top: 150px;">
         <h3> Create Tags:</h3>
         @csrf
+
+        @foreach($errors->all() as $err)
+		{{$err}} <br>
+        @endforeach 
+        
         <input type="text" name="tname">
         <input type="submit" value="Insert">
     </form>

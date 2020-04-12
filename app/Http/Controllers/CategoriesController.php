@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Categorie;
 use Validator;
-
-
+use App\Categorie;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
@@ -19,7 +17,7 @@ class CategoriesController extends Controller
         //
 
         $all = Categorie::all();  
-
+        
         return view('categories.index' ,['all'=>$all] );
     }
 
@@ -50,7 +48,7 @@ class CategoriesController extends Controller
 
             if($validation->fails()){
                 return back()
-                        ->with('erroes', $validation->errors())
+                        ->with('errors', $validation->errors())
                         ->withInput();
             }
 
@@ -100,6 +98,16 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validation = Validator::make($request->all(),[
+            'cname'=>'required',
+            
+        ]);
+
+            if($validation->fails()){
+                return back()
+                        ->with('errors', $validation->errors())
+                        ->withInput();
+            }
 
         $categorie=Categorie::find($id);
 

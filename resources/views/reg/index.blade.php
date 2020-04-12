@@ -10,13 +10,17 @@
 <form action="{{route('regi')}}" method="post" style="text-align: center; padding-top: 150px;">
     
     @csrf
+
+    @foreach($errors->all() as $err)
+    {{$err}} <br>
+    @endforeach 
         Email: <br>
-        <input type="email" name="bemail"><br><br>
+    <input type="text" name="bemail" value="{{old('bemail')}}"><br><br>
         User Name: <br>
-        <input type="text" name="bname"><br><br>
+        <input type="text" name="bname" value="{{old('bname')}}"><br><br>
         Password: <br>
-        <input type="password" name="bpass"><br><br>
-        
+        <input type="password" name="bpass" value="{{old('bpass')}}"><br><br>
+        <h3>{{session('msg')}}</h3>
         <input type="submit" value="Sign Up">
     </form>
 </body>
