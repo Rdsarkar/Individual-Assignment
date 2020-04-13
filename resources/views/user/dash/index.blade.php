@@ -18,13 +18,14 @@
         <tr>
         <td><a href="{{route('categories')}}">All Catagories</a></td>
              <td><a href="{{route('tags')}}">All Tags</a></td>
-            <td><a href="">All Posts</a></td>
+            <td><a href="{{route('posts')}}">All Posts</a></td>
         </tr>
 
        
     </table>
-
-   
+    @foreach($all as $allu)
+    <a href="{{route('userinfo',$allu['id'])}}">PersonalInfo</a>
+   @endforeach 
 
 <a href="{{route('blogout')}}">Logout</a>
 </body>

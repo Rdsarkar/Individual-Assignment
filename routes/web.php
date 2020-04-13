@@ -24,7 +24,7 @@ Route::get('/Users/show/{id}','AdminController@show')->name('showUsers');
 
 //Showing Administrative User Dashboard
 Route::get('/UserDash','UserController@index')->name('userdash');
-
+Route::get('/User/PersonalInfo/{id}','UserController@show')->name('userinfo');
 
 //Posts
 Route::get('/AllPosts','PostsController@index')->name('posts');

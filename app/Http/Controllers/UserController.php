@@ -14,7 +14,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('user.dash.index');
+        $all=Role::where('type','Administrative User')->get();
+        return view('user.dash.index',compact('all'));
     }
 
     /**
@@ -47,6 +48,10 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        $userInfo= Role::where('id', $id)
+                    ->first();
+
+        return view('user.info.index',compact('userInfo'));        
     }
 
     /**
