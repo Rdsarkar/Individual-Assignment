@@ -19,13 +19,32 @@
         <td><a href="{{route('categories')}}">All Catagories</a></td>
              <td><a href="{{route('tags')}}">All Tags</a></td>
             <td><a href="{{route('posts')}}">All Posts</a></td>
-            <td><a href="">All Users</a></td>
+           
         </tr>
 
        
     </table>
 
-   
+   <table border="1px">
+       <tr>
+            <td>All Users</td>
+            <td>User Name</td>
+            <td>Actions</td>
+       </tr>
+      
+
+        @foreach($all as $allu)
+		<tr>
+
+            <td>{{$allu['bemail']}}</td>
+            <td>{{$allu['bname']}}</td>
+        <td><a href="{{route('showUsers',$allu['id'])}}">Details</a></td>
+			
+		</tr>
+		@endforeach 
+       
+     
+   </table>
 
 <a href="{{route('blogout')}}">Logout</a>
 </body>

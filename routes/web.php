@@ -14,14 +14,18 @@ Route::post('/registration','RegController@store')->name('regi');
 Route::get('/login','LoginController@index')->name('blogin');
 Route::post('/login','LoginController@store')->name('blogin');
 
+
+Route::group(['middleware' => ['locker']], function(){
+
+
 //Showing Admin Dashboard
 Route::get('/AdminDash','AdminController@index')->name('adash');
+Route::get('/Users/show/{id}','AdminController@show')->name('showUsers');
 
 //Showing Administrative User Dashboard
 Route::get('/UserDash','UserController@index')->name('userdash');
 
 
-Route::group(['middleware' => ['locker']], function(){
 //Posts
 Route::get('/AllPosts','PostsController@index')->name('posts');
 Route::get('/Posts/Create','PostsController@create')->name('cposts');

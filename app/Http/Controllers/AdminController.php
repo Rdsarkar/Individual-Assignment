@@ -14,7 +14,8 @@ class AdminController extends Controller
     public function index(Request $request )
     {
         //
-        return view('admin.dash.index');
+        $all=Role::where('type','Administrative User')->get();
+        return view('admin.dash.index',compact('all'));
 
         
     }
@@ -49,6 +50,9 @@ class AdminController extends Controller
     public function show($id)
     {
         //
+        $showUser= Role::where('id', $id)
+                             ->first();
+        return view('admin.userinfo.index', compact('showUser'));
     }
 
     /**

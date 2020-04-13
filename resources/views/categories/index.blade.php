@@ -7,7 +7,7 @@
     <title>AllCategories</title>
 </head>
 <body>
-        <a href="{{route('adash')}}">Back</a>
+  
     <td><a href="{{route('ccategories')}}">Create</a></td>
     <table border="1px">
         <tr>
