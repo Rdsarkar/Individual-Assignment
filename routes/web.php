@@ -22,9 +22,6 @@ Route::group(['middleware' => ['locker']], function(){
 Route::get('/AdminDash','AdminController@index')->name('adash');
 Route::get('/Users/show/{id}','AdminController@show')->name('showUsers');
 
-//Showing Administrative User Dashboard
-Route::get('/UserDash','UserController@index')->name('userdash');
-Route::get('/User/PersonalInfo/{id}','UserController@show')->name('userinfo');
 
 //Posts
 Route::get('/AllPosts','PostsController@index')->name('posts');
@@ -47,6 +44,13 @@ Route::post('/CreateTags','TagsController@store')->name('stags');
 Route::get('/Tags/update/{id}','TagsController@show')->name('updateTags');
 Route::post('/UpdatingTags/{id}','TagsController@update')->name('updatingtag');
 Route::get('/Tags/des/{id}', 'TagsController@destroy')->name('destroy');
+
+//Showing Administrative User Dashboard
+Route::get('/UserDash','UserController@index')->name('userdash');
+Route::get('/User/PersonalInfo/{id}','UserController@show')->name('userinfo');
+
+
+
 });
 
 //Logout

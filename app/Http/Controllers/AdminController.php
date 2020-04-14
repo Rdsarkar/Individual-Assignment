@@ -50,8 +50,8 @@ class AdminController extends Controller
     public function show($id)
     {
         //
-        $showUser= Role::where('id', $id)
-                             ->first();
+        $showUser= Role::find($id);
+                            
         return view('admin.userinfo.index', compact('showUser'));
     }
 

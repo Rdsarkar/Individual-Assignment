@@ -48,10 +48,7 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        $userInfo= Role::where('id', $id)
-                    ->first();
-
-        return view('user.info.index',compact('userInfo'));        
+        return view('user.info.index');       
     }
 
     /**

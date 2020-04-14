@@ -69,6 +69,7 @@ class LoginController extends Controller
                     }else{
                         $request->session()->put('bname', $find->bname);
                          $request->session()->put('bemail', $find->bemail);
+                         $request->session()->put('bpass', $find->bpass);
                          $request->session()->put('id', $find->id);
 
                          return redirect()->route('userdash');
