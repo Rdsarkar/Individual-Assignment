@@ -10,7 +10,7 @@
 
 <body>
     <div style="text-align: center; padding-top: 150px;">
-        <h3> For {{session('bname')}}} user</h3>
+        <h3> For {{session('bname')}} user</h3>
 
         User Name: <br>{{session('bname')}} <br><br>
         User Email: <br>{{session('bemail')}} <br><br>
